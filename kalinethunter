@@ -1,0 +1,119 @@
+#!/data/data/com.termux/files/usr/bin/bash
+clear
+echo
+DIRECTORY="/data/data/com.termux/files/usr/share/figlet"
+if [ ! -d "$DIRECTORY" ]; then
+apt update && apt install figlet
+fi
+figlet -f mini    .-----KALI-NETHUNTER-----.
+echo
+echo "---------------Hello This Is Blackat----------------"
+echo "--------Credits and Special thanks to Hax4us--------"
+echo
+echo
+echo "***********Select Your Phone Architecture***********"
+echo
+echo
+echo "----------------------------------------------------"
+echo "1)arm64/armv8 (64 bit Full)"
+echo "2)arm/armhf/armv7 (32 bit Full)"
+echo "3)64 bit minimal version (try this if option 1 is giving errors)"
+echo "4)32 bit minimal version (try this if option 2 is giving errors)"
+echo "5)Detect architecture"
+read aarch
+case $aarch in
+1)
+echo
+echo "Installing prerequisites .."
+echo
+apt install proot wget bsdtar -y
+echo
+echo "Installation completed"
+echo
+echo "Installing KALI-NETHUNTER .."
+echo
+wget https://build.nethunter.com/kalifs/kalifs-20171013/kalifs-arm64-full.tar.xz
+echo
+proot --link2symlink bsdtar -xf kalifs-arm64-full.tar.xz
+cd kali-arm64 && echo "nameserver 8.8.8.8" > etc/resolv.conf
+
+cd .. && echo "unset LD_PRELOAD" > startkali.sh
+printf "proot --link2symlink -0 -r kali-arm64 -b /dev/ -b /sys/ -b /proc/ -b /data/data/com.termux/files/home -b /system -b /mnt /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM /bin/bash --login" >> startkali.sh
+
+chmod 777 startkali.sh && termux-fix-shebang startkali.sh
+echo
+cd $HOME/Kali-Nethunter && chmod -R 777 kali-arm64
+echo "Now You Can Start Kali Linux (Nethunter) By :--> ./startkali.sh"
+echo
+;;
+2)
+echo "Installing prerequisites .."
+echo
+apt install proot wget bsdtar -y
+echo
+echo "Installation completed"
+echo
+echo "Installing KALI-NETHUNTER .."
+echo
+wget https://build.nethunter.com/kalifs/kalifs-latest/kalifs-armhf-minimal.tar.xz
+echo
+proot --link2symlink bsdtar -xf kalifs-armhf-minimal.tar.xz
+cd kali-armhf && echo "nameserver 8.8.8.8" > etc/resolv.conf
+cd .. && echo "unset LD_PRELOAD" > startkali.sh
+printf "proot --link2symlink -0 -r kali-armhf -b /dev/ -b /sys/ -b /proc/ -b /data/data/com.termux/files/home -b /system -b /mnt /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM /bin/bash --login" >> startkali.sh
+
+chmod 777 startkali.sh && termux-fix-shebang startkali.sh
+echo
+echo "Now You Can Start Kali Linux (Nethunter) By :--> ./startkali.sh" 
+echo
+;;
+3)
+echo
+echo "Installing prerequisites .."
+echo
+apt install proot wget bsdtar -y
+echo
+echo "Installation completed"
+echo
+echo "Installing KALI-NETHUNTER .."
+echo
+wget https://build.nethunter.com/kalifs/kalifs-20171013/kalifs-arm64-minimal.tar.xz
+echo
+proot --link2symlink bsdtar -xf kalifs-arm64-minimal.tar.xz
+cd kali-arm64 && echo "nameserver 8.8.8.8" > etc/resolv.conf
+cd .. && echo "unset LD_PRELOAD" > startkali.sh
+printf "proot --link2symlink -0 -r kali-arm64 -b /dev/ -b /sys/ -b /proc/ -b /data/data/com.termux/files/home -b /system -b /mnt /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM /bin/bash --login" >> startkali.sh
+chmod 777 startkali.sh && termux-fix-shebang startkali.sh
+echo
+echo "Now You Can Start Kali Linux (Nethunter) By :--> ./startkali.sh"
+echo
+;;
+4)
+echo
+echo "Installing prerequisites .."
+echo
+apt install proot wget bsdtar -y
+echo
+echo "Installation completed"
+echo
+echo "Installing KALI-NETHUNTER .."
+echo
+wget https://build.nethunter.com/kalifs/kalifs-20171013/kalifs-arm64-minimal.tar.xz
+echo
+proot --link2symlink bsdtar -xf kalifs-arm64-minimal.tar.xz
+cd kali-arm64 && echo "nameserver 8.8.8.8" > etc/resolv.conf
+cd .. && echo "unset LD_PRELOAD" > startkali.sh
+printf "proot --link2symlink -0 -r kali-arm64 -b /dev/ -b /sys/ -b /proc/ -b /data/data/com.termux/files/home -b /system -b /mnt /usr/bin/env -i HOME=/root PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games TERM=$TERM /bin/bash --login" >> startkali.sh
+chmod 777 startkali.sh && termux-fix-shebang startkali.sh
+echo
+echo "Now You Can Start Kali Linux (Nethunter) By :--> ./startkali.sh"
+echo
+;;
+5)
+echo
+echo "Your phone architecture is :-"
+aarch=`dpkg --print-architecture`
+echo $aarch
+;;
+esac
+
